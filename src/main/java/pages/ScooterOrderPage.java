@@ -61,20 +61,6 @@ public class ScooterOrderPage {
         driver.findElement(ScooterOrderPageLocators.POPUP_YES_BUTTON).click();
     }
 
-    // Нажимает кнопку "Посмотреть статус" на форме заказа оформлен
-    public void clickViewStatusButton() {
-        driver.findElement(ScooterOrderPageLocators.VIEW_STATUS_BUTTON).click();
-    }
-
-    // Проверяет, отображается ли форма данных клиента
-    public boolean isClientDetailsFormDisplayed() {
-        return isElementDisplayed(ScooterOrderPageLocators.FOR_WHOM_SCOOTER_DIV);
-    }
-
-    // Проверяет, отображается ли форма выбора срока аренды
-    public boolean isRentalPeriodFormDisplayed() {
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(ScooterOrderPageLocators.dropdownContainer)).isDisplayed();
-    }
 
     // Нажимает на поле выбора срока аренды
     public void clickRentalPeriodField() {
@@ -92,39 +78,10 @@ public class ScooterOrderPage {
         }
     }
 
-    // Проверяет, отображается ли подтверждение оформления заказа
-    public boolean isOrderConfirmationDisplayed() {
-        return isElementDisplayed(ScooterOrderPageLocators.locatorOfferToConfirmed);
-    }
-
-    // Получает номер заказа
-    public String getOrderNumber() {
-        clickPopupYesButton();
-        WebElement orderNumberElement = wait.until(ExpectedConditions.presenceOfElementLocated(ScooterOrderPageLocators.orderNumber));
-        // Получение текстового значения номера заказа
-        String orderNumber = orderNumberElement.getText();
-
-        // Вывод номера заказа в консоль
-        System.out.println("Номер заказа: " + orderNumber);
-        return orderNumber;
-    }
-
-    // Проверяет, отображается ли кнопка "Да" в попапе
-    public boolean isPopupYesButtonDisplayed() {
-        return driver.findElement(ScooterOrderPageLocators.POPUP_YES_BUTTON).isDisplayed();
-    }
-
     // Получает текст элемента заказа
     public String getOrderElementText() {
         return driver.findElement(ScooterOrderPageLocators.locatorOfferToConfirmed).getText();
     }
 
-    // Проверяет, отображается ли элемент
-    private boolean isElementDisplayed(By locator) {
-        try {
-            return wait.until(ExpectedConditions.visibilityOfElementLocated(locator)).isDisplayed();
-        } catch (Exception e) {
-            return false;
-        }
-    }
+
 }

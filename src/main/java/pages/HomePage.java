@@ -25,9 +25,6 @@ public class HomePage {
         driver.get("https://qa-scooter.praktikum-services.ru/");
     }
 
-    public boolean isPageLoaded() {
-        return wait.until(ExpectedConditions.urlToBe("https://qa-scooter.praktikum-services.ru/"));
-    }
 
     public void acceptCookie() {
         By cookieButtonLocator = HomePageLocators.COOKIE_CONSENT_BUTTON;
@@ -70,20 +67,9 @@ public class HomePage {
     }
 
     public void clickBottomOrderButton() {
-        By orderButtonLocator = ScooterOrderPageLocators.ORDER_BUTTON_FORM;
-        WebElement orderButton = wait.until(ExpectedConditions.elementToBeClickable(orderButtonLocator));
+        By orderButtonLocator = HomePageLocators.HOME_ORDER_BUTTON_DOWN;
+        WebElement orderButton = driver.findElement(orderButtonLocator);
         orderButton.click();
     }
 
-    public void chooseRandomFAQItem() {
-        List<WebElement> faqItems = getAccordionItems();
-        if (!faqItems.isEmpty()) {
-            Random random = new Random();
-            int randomIndex = random.nextInt(faqItems.size());
-            WebElement faqItem = faqItems.get(randomIndex);
-            clickAccordionItem(randomIndex);
-        } else {
-            System.out.println("No FAQ items found.");
-        }
-    }
 }
